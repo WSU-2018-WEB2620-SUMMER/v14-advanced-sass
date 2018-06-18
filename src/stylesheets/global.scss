@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 16px;
+}
+
+$basic-color: rgb(204, 204, 204);
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$error-color: #dc3545;
+$warning-color: #ffc107;
+
+
+$buttons: (basic: rgb(204, 204, 204),
+          primary: #007bff,
+          secondary: #6c757d,
+          success: #28a745,
+          error: #dc3545,
+          warning: #ffc107
+          );

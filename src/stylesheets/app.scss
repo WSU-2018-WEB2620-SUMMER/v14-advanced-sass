@@ -1,0 +1,109 @@
+@function calc-font-size($num){
+  @if unitless($num) {
+    @return 2.8 - ($num - 1) * .3;
+  }@else{
+    @error "Invalid argument. Must be unitless.";
+    @return 0;
+  }
+}
+
+@function calc-header-color($num, $color1: white, $color2: black){
+  @return mix($color1, $color2, $num * 15);
+}
+//@for $num from 1 through 6 {
+//  h#{$num} {
+//    font-size: calc-font-size($num) * 1rem;
+//    color: calc-header-color($num);
+//  }
+//}
+$num: 1;
+@while $num <= 6 {
+  h#{$num} {
+    font-size: calc-font-size($num) * 1rem;
+    color: calc-header-color($num);
+  }
+  $num: $num + 1;
+}
+
+$header-list: huge xlarge large medium small tiny;
+
+%header {
+  font-weight: bolder;
+  margin: .7em 0;
+  
+  @at-root a#{&} {
+    text-decoration: none;
+  }
+}
+@each $hdr in $header-list {
+  .header.#{$hdr} {
+    @extend %header;
+    @extend h#{index($header-list, $hdr)};
+  }
+}
+
+
+
+@mixin foo-style {
+  color: white;
+  padding: 5px;
+  margin: auto;
+}
+
+.foo {
+  @include foo-style;
+}
+
+.bar {
+  @extend .foo;
+}
+
+
+.button .interior .small-icon {
+  width: 10px;
+}
+
+.side {
+  .top,
+  .middle,
+  .bottom {
+    .sign-in,
+    .register {
+      @extend .small-icon;
+    }
+  }
+}
+
+.footer {
+  .links,
+  .social {
+    .facebook,
+    .twitter {
+      @extend .small-icon;
+    }
+  }
+}
+
+
+@import "global";
+@import "button";
+
+.new {
+  @extend .primary.button;
+}
+
+.edit {
+  @extend .secondary.button;
+}
+
+.approve {
+  @extend .button.success;
+}
+
+.deny {
+  @extend .button.error;
+}
+
+.warn {
+  @extend .button.warning;
+}
